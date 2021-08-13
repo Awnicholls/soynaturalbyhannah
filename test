@@ -1,0 +1,33 @@
+ <Grid item xs={12} sm={6}>
+       <InputLabel htmlFor="scent">Scent</InputLabel>
+        <Select
+        fullWidth
+          value={scents.text}
+          onChange={handleScent}
+         >
+{scents.map(scent => {
+  return (
+    <MenuItem key={scent.key} value={scent.value}>
+      {scent.text}
+    </MenuItem>
+  );
+})}          
+        </Select>
+            </Grid>
+            <Grid item xs={12} sm={6}>
+        <InputLabel htmlFor="size">Sizes</InputLabel>
+              <Select
+                fullWidth
+          value={sizes.text}
+          onChange={handleSize}
+         >
+{sizes.map(size => {
+  return (
+    <MenuItem key={size.key} value={size.value}>
+      {size.text}  ({size.price})
+    </MenuItem>
+  );
+})}          
+        </>
+              </Select>
+            </Grid>

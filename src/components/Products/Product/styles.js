@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export default makeStyles(() => ({
+export default makeStyles((theme) => ({
   root: {
     // maxWidth: 345, original width style
     maxWidth: '100%',
@@ -17,4 +17,9 @@ export default makeStyles(() => ({
     display: 'flex',
     justifyContent: 'space-between',
   },
+  formControl: {
+    width: '100%',
+    margin: theme.spacing(1),
+    marginRight: '5'
+  }
 }));

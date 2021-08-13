@@ -99,7 +99,7 @@ const AddressForm = ({ checkoutToken, test }) => {
               label="First Name"
               placeholder="John"
               control={control}
-              as={Form.Input}
+              // as={Form.Input}
               rules={{ required: "Please enter Firstname" }}
               error={errors.firstname && errors.firstname.message}
             />
