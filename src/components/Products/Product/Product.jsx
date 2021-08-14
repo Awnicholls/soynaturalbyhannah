@@ -20,10 +20,27 @@ const Product = ({ product, onAddToCart }) => {
   const [scents, setScents] = useState([]);
   const [sizes, setSizes]= useState([]);
   const [variantInfo, setVariantInfo]= useState();
- console.log(product)
+  const [variant1Info, setVariant1Info]= useState('');
+  const [variant2Info, setVariant2Info]= useState('');
+  const [variant1Group, setVariant1Group]= useState('');
+  const [variant2Group, setVariant2Group]= useState('');
 
- 
+console.log(product)
+console.log(variant1Group)
 
+useEffect(() => {
+let finalVariantObject = product.variant_groups.map(variant_group =>
+  {
+    let variantGroups = {}
+    variantGroups.id = variant_group.id
+    return variantGroups
+
+
+  })
+  setVariant1Group(finalVariantObject[0].id)
+  setVariant2Group(finalVariantObject[1].id)
+
+}, [])
 
 useEffect(() => {
   let finalScentArray = product.variant_groups[0].options.map(option => {
@@ -31,11 +48,13 @@ useEffect(() => {
     scentInfo.key = option.name
     scentInfo.text = option.name
     scentInfo.value= option.id
+
     return scentInfo
   })
   setScents(finalScentArray)
 }, [])
 
+// console.log(scents[0]['key'])
 
 useEffect(() => {
   let finalSizeArray = product.variant_groups[1].options.map(option => {
@@ -47,21 +66,40 @@ useEffect(() => {
       return sizeInfo
   })
   setSizes(finalSizeArray)
+  // console.log(sizes)
 }, [])
 
-const handleSize = (e, {value}) => {
-  setVariantInfo({[product.variant_groups[1].id]: value})
+// const handleSize = (e, {value}) => {
+//   setVariantInfo({[product.variant_groups[1].id]: value})
+//   console.log(value)
+// }
+// const handleScent = (e, {value}) => {
+//   setVariantInfo({[product.variant_groups[0].id]: value})
+// }
+
+const handleScent = e => {setVariant1Info(e.target.value)
+console.log(variant1Info)}
+
+const handleSize = e => {setVariant2Info(e.target.value)
+  console.log(e.target.value) }
+
+const handleVariants = () => {
+  const variantObject = {
+    [variant1Group]: variant1Info,
+    [variant2Group]: variant2Info
+    
+  }
+setVariantInfo(variantObject)
+console.log(variantObject)
+console.log(variantInfo)
 }
-const handleScent = (e, {value}) => {
-  setVariantInfo({[product.variant_groups[0].id]: value})
+
+
+
+  const handleAddToCart = () => {
+  handleVariants();
+  onAddToCart(product.id, 1, variantInfo);
 }
-
-// const handleChange = (event) => {
-//   setScent(event.target.value);
-// };
-
-
-  const handleAddToCart = () => onAddToCart(product.id, 1, variantInfo);
 
 
   // const handleVariantInfo = e => {
@@ -106,9 +144,9 @@ const handleScent = (e, {value}) => {
 <FormControl className={classes.formControl}>
         <InputLabel htmlFor="scent">Scent</InputLabel>
         <Select className={classes.select}
-        autoWidth = {true}
-          value={scents.text}
+          value={scents['text']}
           onChange={handleScent}
+          required
          >
 {scents.map(scent => {
   return (
@@ -122,6 +160,7 @@ const handleScent = (e, {value}) => {
       <FormControl className={classes.formControl}>
         <InputLabel htmlFor="size">Sizes</InputLabel>
         <Select
+        required
         className={classes.select}
           value={sizes.text}
           onChange={handleSize}
