@@ -5,6 +5,7 @@ import useStyles from './styles';
 
 const CartItem = ({ item, onUpdateCartQty, onRemoveFromCart }) => {
   const classes = useStyles();
+  console.log(item)
 
   const handleUpdateCartQty = (lineItemId, newQuantity) => onUpdateCartQty(lineItemId, newQuantity);
 
@@ -16,6 +17,8 @@ const CartItem = ({ item, onUpdateCartQty, onRemoveFromCart }) => {
       <CardContent className={classes.cardContent}>
         <Typography variant="h4">{item.name}</Typography>
         <Typography variant="h5">{item.line_total.formatted_with_symbol}</Typography>
+        <Typography variant="h5">{item.selected_options[0].option_name}</Typography>
+        <Typography variant="h5">{item.selected_options[1].option_name}</Typography>
       </CardContent>
       <CardActions className={classes.cardActions}>
         <div className={classes.buttons}>

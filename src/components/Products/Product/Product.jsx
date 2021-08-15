@@ -10,6 +10,7 @@ import {
   MenuItem,
   FormControl,
   Select,
+  CircularProgress
 } from "@material-ui/core";
 import { AddShoppingCart } from "@material-ui/icons";
 
@@ -17,6 +18,7 @@ import useStyles from "./styles";
 
 const Product = ({ product, onAddToCart }) => {
   const classes = useStyles();
+  const [isLoading, setLoading] = useState(true);
   const [scents, setScents] = useState([]);
   const [sizes, setSizes]= useState([]);
   const [variantInfo, setVariantInfo]= useState();
@@ -24,23 +26,8 @@ const Product = ({ product, onAddToCart }) => {
   const [variant2Info, setVariant2Info]= useState('');
   const [variant1Group, setVariant1Group]= useState('');
   const [variant2Group, setVariant2Group]= useState('');
-
-console.log(product)
-console.log(variant1Group)
-
-useEffect(() => {
-let finalVariantObject = product.variant_groups.map(variant_group =>
-  {
-    let variantGroups = {}
-    variantGroups.id = variant_group.id
-    return variantGroups
-
-
-  })
-  setVariant1Group(finalVariantObject[0].id)
-  setVariant2Group(finalVariantObject[1].id)
-
-}, [])
+//console.log(product)
+// console.log(variant1Group)
 
 useEffect(() => {
   let finalScentArray = product.variant_groups[0].options.map(option => {
@@ -54,7 +41,9 @@ useEffect(() => {
   setScents(finalScentArray)
 }, [])
 
-// console.log(scents[0]['key'])
+console.log(scents)
+console.log(sizes)
+console.log(isLoading)
 
 useEffect(() => {
   let finalSizeArray = product.variant_groups[1].options.map(option => {
@@ -65,40 +54,56 @@ useEffect(() => {
     sizeInfo.price = option.price.formatted_with_symbol
       return sizeInfo
   })
-  setSizes(finalSizeArray)
-  // console.log(sizes)
+  setSizes(finalSizeArray);
+
 }, [])
 
-// const handleSize = (e, {value}) => {
-//   setVariantInfo({[product.variant_groups[1].id]: value})
-//   console.log(value)
-// }
-// const handleScent = (e, {value}) => {
-//   setVariantInfo({[product.variant_groups[0].id]: value})
-// }
+useEffect(() => {
+  let finalVariantObject = product.variant_groups.map(variant_group =>
+    {
+      let variantGroups = {}
+      variantGroups.id = variant_group.id
+      return variantGroups
+  
+  
+    })
+    setVariant1Group(finalVariantObject[0].id)
+    setVariant2Group(finalVariantObject[1].id)
+
+
+  setLoading(false)
+  }, [])
+
+  useEffect(()=> {
+    if (!isLoading){
+      setVariant2Info(sizes[0].value)
+      setVariant1Info(scents[0].value)
+    }
+  }, [])
 
 const handleScent = e => {setVariant1Info(e.target.value)
-console.log(variant1Info)}
+  console.log(e.target)
+}
 
 const handleSize = e => {setVariant2Info(e.target.value)
-  console.log(e.target.value) }
+console.log(variant2Info)
+
+ }
 
 const handleVariants = () => {
   const variantObject = {
     [variant1Group]: variant1Info,
     [variant2Group]: variant2Info
-    
   }
-setVariantInfo(variantObject)
-console.log(variantObject)
-console.log(variantInfo)
+return variantObject
 }
 
 
 
   const handleAddToCart = () => {
-  handleVariants();
-  onAddToCart(product.id, 1, variantInfo);
+
+  setVariantInfo(handleVariants());
+  console.log(product.id, 1, variantInfo);
 }
 
 
@@ -116,7 +121,9 @@ console.log(variantInfo)
   //   e.target.classList.toggle('active')
   // }
 
-
+if (isLoading){
+  return  ( <CircularProgress/> )
+} 
 
   return (
     <Card className={classes.root}>
@@ -144,9 +151,9 @@ console.log(variantInfo)
 <FormControl className={classes.formControl}>
         <InputLabel htmlFor="scent">Scent</InputLabel>
         <Select className={classes.select}
-          value={scents['text']}
-          onChange={handleScent}
-          required
+        displayEmpty
+        onChange={handleScent}
+        value={variant1Info}
          >
 {scents.map(scent => {
   return (
@@ -160,11 +167,11 @@ console.log(variantInfo)
       <FormControl className={classes.formControl}>
         <InputLabel htmlFor="size">Sizes</InputLabel>
         <Select
-        required
+        displayEmpty
         className={classes.select}
-          value={sizes.text}
-          onChange={handleSize}
-         >
+        onChange={handleSize}
+        value={variant2Info}
+          >
 {sizes.map(size => {
   return (
     <MenuItem key={size.key} value={size.value}>
