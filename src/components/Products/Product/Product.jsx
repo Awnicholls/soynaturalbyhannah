@@ -21,13 +21,11 @@ const Product = ({ product, onAddToCart }) => {
   const [isLoading, setLoading] = useState(true);
   const [scents, setScents] = useState([]);
   const [sizes, setSizes]= useState([]);
-  const [variantInfo, setVariantInfo]= useState();
   const [variant1Info, setVariant1Info]= useState('');
   const [variant2Info, setVariant2Info]= useState('');
   const [variant1Group, setVariant1Group]= useState('');
   const [variant2Group, setVariant2Group]= useState('');
-//console.log(product)
-// console.log(variant1Group)
+
 
 useEffect(() => {
   let finalScentArray = product.variant_groups[0].options.map(option => {
@@ -41,9 +39,6 @@ useEffect(() => {
   setScents(finalScentArray)
 }, [])
 
-console.log(scents)
-console.log(sizes)
-console.log(isLoading)
 
 useEffect(() => {
   let finalSizeArray = product.variant_groups[1].options.map(option => {
@@ -81,29 +76,34 @@ useEffect(() => {
     }
   }, [])
 
-const handleScent = e => {setVariant1Info(e.target.value)
-  console.log(e.target)
+const handleScent = e => {
+  console.log(e.currentTarget.getAttribute('data-value'))
+  console.log(e.currentTarget.getAttribute('name'))
+
+  setVariant1Info(e.currentTarget.getAttribute('data-value'))
 }
 
-const handleSize = e => {setVariant2Info(e.target.value)
-console.log(variant2Info)
+const handleSize = e => {
+  console.log(e.currentTarget.getAttribute('data-value'))
+  console.log(e.currentTarget.getAttribute('name'))
 
+
+
+  setVariant2Info(e.currentTarget.getAttribute('data-value'))
  }
 
-const handleVariants = () => {
-  const variantObject = {
-    [variant1Group]: variant1Info,
-    [variant2Group]: variant2Info
-  }
-return variantObject
-}
+
 
 
 
   const handleAddToCart = () => {
 
-  setVariantInfo(handleVariants());
-  console.log(product.id, 1, variantInfo);
+    const variantObject = {
+        [variant1Group]: variant1Info,
+        [variant2Group]: variant2Info
+      }
+
+  onAddToCart(product.id, 1, variantObject);
 }
 
 
@@ -154,10 +154,11 @@ if (isLoading){
         displayEmpty
         onChange={handleScent}
         value={variant1Info}
+        name='scent'
          >
 {scents.map(scent => {
   return (
-    <MenuItem key={scent.key} value={scent.value}>
+    <MenuItem key={scent.key} name={scent.text} value={scent.value}>
       {scent.text}
     </MenuItem>
   );
@@ -171,10 +172,11 @@ if (isLoading){
         className={classes.select}
         onChange={handleSize}
         value={variant2Info}
+        name='size'
           >
 {sizes.map(size => {
   return (
-    <MenuItem key={size.key} value={size.value}>
+    <MenuItem key={size.key} name={size.text} value={size.value}>
       {size.text}  ({size.price})
     </MenuItem>
   );
