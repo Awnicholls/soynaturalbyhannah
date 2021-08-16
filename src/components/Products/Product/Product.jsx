@@ -91,10 +91,10 @@ const Product = ({ product, onAddToCart }) => {
     setHasError1(false);
     setHasError2(false);
 
-    if (variant1Info == ""){
+    if (variant1Info === ""){
       setHasError1(true)
     }
-    if (variant2Info == ""){
+    if (variant2Info === ""){
       setHasError2(true)
     }
 

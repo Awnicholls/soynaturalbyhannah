@@ -21,7 +21,7 @@ const AddressForm = ({ checkoutToken, test }) => {
   const [shippingSubdivision, setShippingSubdivision] = useState("");
   const [shippingOptions, setShippingOptions] = useState([]);
   const [shippingOption, setShippingOption] = useState("");
-  const {  handleSubmit, errors, control } = useForm();
+  const {  handleSubmit,  control } = useForm();
 
   const onSubmit = (data) => {
     console.log(data);
