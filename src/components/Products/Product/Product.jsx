@@ -11,7 +11,7 @@ import {
   FormControl,
   Select,
   CircularProgress,
-  FormHelperText,
+  
 } from "@material-ui/core";
 import { AddShoppingCart } from "@material-ui/icons";
 
@@ -42,7 +42,7 @@ useEffect(() => {
       return scentInfo;
     });
     setScents(finalScentArray);
-  }, []);
+  }, [product]);
 
   useEffect(() => {
     let finalSizeArray = product.variant_groups[1].options.map((option) => {
@@ -54,7 +54,7 @@ useEffect(() => {
       return sizeInfo;
     });
     setSizes(finalSizeArray);
-  }, []);
+  }, [product]);
 
   useEffect(() => {
     let finalVariantObject = product.variant_groups.map((variant_group) => {
@@ -68,14 +68,14 @@ useEffect(() => {
     setVariantGroup(finalVariantObject);
 
     setLoading(false);
-  }, []);
+  }, [product]);
 
   useEffect(() => {
     if (!isLoading) {
       setVariant2Info(sizes[0].value);
       setVariant1Info(scents[0].value);
     }
-  }, []);
+  }, [sizes, scents, isLoading]);
 
   const handleScent = (e) => {
     console.log(e.currentTarget.getAttribute("data-value"));
