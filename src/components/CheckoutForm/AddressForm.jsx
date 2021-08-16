@@ -101,7 +101,6 @@ const AddressForm = ({ checkoutToken, test }) => {
               control={control}
               // as={Form.Input}
               rules={{ required: "Please enter Firstname" }}
-              error={errors.firstname && errors.firstname.message}
             />
             <FormInput required name="lastName" label="Last name" />
             <FormInput required name="address1" label="Address line 1" />
@@ -117,7 +116,7 @@ const AddressForm = ({ checkoutToken, test }) => {
               >
                 {Object.entries(shippingCountries)
                   .map(([code, name]) => ({ id: code, label: name }))
-                  .map((item) => (
+                  .map((item) => ( 
                     <MenuItem key={item.id} value={item.id}>
                       {item.label}
                     </MenuItem>

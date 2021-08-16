@@ -1,10 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { CssBaseline } from '@material-ui/core';
+import { CssBaseline, createTheme, ThemeProvider } from '@material-ui/core';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-
 import { Navbar, Products, Cart, Checkout } from './components';
 import { commerce } from './lib/commerce';
 
+import { purple } from '@material-ui/core/colors';
+const theme =(createTheme)({
+  palette:{
+    primary: purple
+    
+  }
+
+})
 const App = () => {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [products, setProducts] = useState([]);
@@ -72,6 +79,7 @@ const App = () => {
   const handleDrawerToggle = () => setMobileOpen(!mobileOpen);
 
   return (
+    <ThemeProvider theme={theme}>
     <Router>
       <div style={{ display: 'flex' }}>
         <CssBaseline />
@@ -89,6 +97,7 @@ const App = () => {
         </Switch>
       </div>
     </Router>
+    </ThemeProvider>
   );
 };
 

@@ -11,16 +11,12 @@ import {
   FormControl,
   Select,
   CircularProgress,
-  
 } from "@material-ui/core";
 import { AddShoppingCart } from "@material-ui/icons";
 
 import useStyles from "./styles";
 
 const Product = ({ product, onAddToCart }) => {
-
-  console.log(product);
-
   const classes = useStyles();
   const [isLoading, setLoading] = useState(true);
   const [scents, setScents] = useState([]);
@@ -30,9 +26,9 @@ const Product = ({ product, onAddToCart }) => {
   const [variantGroup, setVariantGroup] = useState([]);
   const [variant1GroupId, setVariant1GroupId] = useState("");
   const [variant2GroupId, setVariant2GroupId] = useState("");
-const [hasError1, setHasError1] = useState(true)
-const [hasError2, setHasError2] = useState(true)  
-useEffect(() => {
+  const [hasError1, setHasError1] = useState(false);
+  const [hasError2, setHasError2] = useState(false);
+  useEffect(() => {
     let finalScentArray = product.variant_groups[0].options.map((option) => {
       let scentInfo = {};
       scentInfo.key = option.name;
@@ -82,7 +78,6 @@ useEffect(() => {
     console.log(e.currentTarget.getAttribute("name"));
 
     setVariant1Info(e.currentTarget.getAttribute("data-value"));
-   setHasError1(false);
   };
 
   const handleSize = (e) => {
@@ -90,25 +85,35 @@ useEffect(() => {
     console.log(e.currentTarget.getAttribute("name"));
 
     setVariant2Info(e.currentTarget.getAttribute("data-value"));
-    setHasError2(false);
-
   };
 
   const handleAddToCart = () => {
+    setHasError1(false);
+    setHasError2(false);
+
+    if (variant1Info == ""){
+      setHasError1(true)
+    }
+    if (variant2Info == ""){
+      setHasError2(true)
+    }
+
     const variantObject = {
       [variant1GroupId]: variant1Info,
       [variant2GroupId]: variant2Info,
     };
-    if (hasError1 || hasError2){
-      return
-    } else {
-    onAddToCart(product.id, 1, variantObject);
-  }};
+    if (variant1Info && variant2Info) {
+
+      onAddToCart(product.id, 1, variantObject);
+    }
+  };
 
   if (isLoading) {
-   return ( <div className={classes.spinner}>
-      <CircularProgress />
-    </div>)
+    return (
+      <div className={classes.spinner}>
+        <CircularProgress />
+      </div>
+    );
   }
 
   return (
@@ -142,6 +147,7 @@ useEffect(() => {
               onChange={handleScent}
               value={variant1Info}
               name="scent"
+              error={hasError1}
             >
               {scents.map((scent) => {
                 return (
@@ -155,7 +161,7 @@ useEffect(() => {
                 );
               })}
             </Select>
-           {/* {hasError1 && <FormHelperText>This is required!</FormHelperText>} */}
+            {/* {hasError1 && <FormHelperText>This is required!</FormHelperText>} */}
           </FormControl>
           <FormControl required className={classes.formControl}>
             <InputLabel htmlFor="size">{variantGroup[1].name}</InputLabel>
@@ -165,6 +171,7 @@ useEffect(() => {
               onChange={handleSize}
               value={variant2Info}
               name="size"
+              error={hasError2}
             >
               {sizes.map((size) => {
                 return (
@@ -179,8 +186,7 @@ useEffect(() => {
         </div>
       </CardContent>
       <CardActions disableSpacing className={classes.cardActions}>
-        <IconButton 
-        aria-label="Add to Cart" onClick={handleAddToCart}>
+        <IconButton aria-label="Add to Cart" onClick={handleAddToCart}>
           <AddShoppingCart />
         </IconButton>
       </CardActions>
