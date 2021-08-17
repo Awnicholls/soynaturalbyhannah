@@ -6,20 +6,7 @@ export default makeStyles((theme) => ({
     maxWidth: '100%',
   },
   media: {
-    height: 0,
-    paddingTop: '56.25%', // 16:9
+    height: 260,
   },
-  cardActions: {
-    display: 'flex',
-    justifyContent: 'flex-end',
-  },
-  cardContent: {
-    display: 'flex',
-    justifyContent: 'space-between',
-  },
-  formControl: {
-    width: '100%',
-    margin: theme.spacing(1),
-    marginRight: '5'
-  }
+
 }));
