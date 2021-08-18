@@ -13,13 +13,11 @@ import {
   CircularProgress,
 } from "@material-ui/core";
 import { AddShoppingCart } from "@material-ui/icons";
-import { useHistory } from 'react-router-dom';
 
 import useStyles from "./styles";
 
 const ProductDetails = ({ product, onAddToCart }) => {
   const classes = useStyles();
-  const history = useHistory();
   const [isLoading, setLoading] = useState(true);
   const [scents, setScents] = useState([]);
   const [sizes, setSizes] = useState([]);
