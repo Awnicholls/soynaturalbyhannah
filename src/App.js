@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { CssBaseline, createTheme, ThemeProvider } from "@material-ui/core";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, useHistory} from "react-router-dom";
 import { Navbar, Products, Cart, Checkout, Details } from "./components";
 import { commerce } from "./lib/commerce";
 
@@ -79,9 +79,11 @@ const App = () => {
 
   const handleDrawerToggle = () => setMobileOpen(!mobileOpen);
 
+  const history = useHistory();
+
   return (
     <ThemeProvider theme={theme}>
-      <Router>
+      <Router history={history}>
         <div style={{ display: "flex" }}>
           <CssBaseline />
           <Navbar
