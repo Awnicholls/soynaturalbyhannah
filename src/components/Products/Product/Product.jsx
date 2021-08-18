@@ -36,7 +36,7 @@ const Product = ({ product , handleDetail}) => {
 
   return (
     <Card className={classes.root}>
-      <CardActionArea onClick={e =>  {console.log(product)}}>
+      <CardActionArea component={Link} to={`/details/${product.id}`}>
       <CardMedia
       component='img'
       alt={product.name}
@@ -46,7 +46,7 @@ const Product = ({ product , handleDetail}) => {
       />
       </CardActionArea>
       <CardActions>
-        <Button  component={Link} to={`/Details/${product.id}`} aria-label="Show product details" size='small' color='primary'>
+        <Button  component={Link} to={`/details/${product.id}`} aria-label="Show product details" size='small' color='primary'>
           View Details
         </Button>
         <div className={classes.grow} />
