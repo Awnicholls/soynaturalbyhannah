@@ -11,12 +11,17 @@ import {
   FormControl,
   Select,
   CircularProgress,
+  Container,
 } from "@material-ui/core";
 import { AddShoppingCart } from "@material-ui/icons";
 
 import useStyles from "./styles";
+import { useParams } from "react-router-dom";
 
-const ProductDetails = ({ product, onAddToCart }) => {
+const ProductDetails = ({ products, onAddToCart }) => {
+  const { id } = useParams();
+  const product = products.find((prod) => prod.id === id);
+
   const classes = useStyles();
   const [isLoading, setLoading] = useState(true);
   const [scents, setScents] = useState([]);
@@ -28,6 +33,11 @@ const ProductDetails = ({ product, onAddToCart }) => {
   const [variant2GroupId, setVariant2GroupId] = useState("");
   const [hasError1, setHasError1] = useState(false);
   const [hasError2, setHasError2] = useState(false);
+
+  useEffect(() => {
+    document.title = `${product.name}`;
+  });
+
   useEffect(() => {
     let finalScentArray = product.variant_groups[0].options.map((option) => {
       let scentInfo = {};
@@ -73,6 +83,8 @@ const ProductDetails = ({ product, onAddToCart }) => {
     }
   }, [sizes, scents, isLoading]);
 
+  if (product === undefined) return "Loading";
+
   const handleScent = (e) => {
     console.log(e.currentTarget.getAttribute("data-value"));
     console.log(e.currentTarget.getAttribute("name"));
@@ -91,11 +103,11 @@ const ProductDetails = ({ product, onAddToCart }) => {
     setHasError1(false);
     setHasError2(false);
 
-    if (variant1Info === ""){
-      setHasError1(true)
+    if (variant1Info === "") {
+      setHasError1(true);
     }
-    if (variant2Info === ""){
-      setHasError2(true)
+    if (variant2Info === "") {
+      setHasError2(true);
     }
 
     const variantObject = {
@@ -103,7 +115,6 @@ const ProductDetails = ({ product, onAddToCart }) => {
       [variant2GroupId]: variant2Info,
     };
     if (variant1Info && variant2Info) {
-
       onAddToCart(product.id, 1, variantObject);
     }
   };
@@ -116,85 +127,98 @@ const ProductDetails = ({ product, onAddToCart }) => {
     );
   }
 
+  const renderDetails = () => (
+    <>
+      <main className={classes.content}>
+        <Card className={classes.root}>
+          <CardMedia
+            className={classes.media}
+            image={product.media.source}
+            title={product.name}
+          />
+          <CardContent>
+            <div className={classes.cardContent}>
+              <Typography gutterBottom variant="h5" component="h2">
+                {product.name}
+              </Typography>
+              <Typography gutterBottom variant="h5" component="h2">
+                {/* {product.price.formatted} */}
+              </Typography>
+            </div>
+            <Typography
+              dangerouslySetInnerHTML={{ __html: product.description }}
+              variant="body2"
+              color="textSecondary"
+              component="p"
+            />
+            <div>
+              <FormControl required className={classes.formControl}>
+                <InputLabel htmlFor="scent">{variantGroup[0].name}</InputLabel>
+                <Select
+                  className={classes.select}
+                  displayEmpty
+                  onChange={handleScent}
+                  value={variant1Info}
+                  name="scent"
+                  error={hasError1}
+                >
+                  {scents.map((scent) => {
+                    return (
+                      <MenuItem
+                        key={scent.key}
+                        name={scent.text}
+                        value={scent.value}
+                      >
+                        {scent.text}
+                      </MenuItem>
+                    );
+                  })}
+                </Select>
+                {/* {hasError1 && <FormHelperText>This is required!</FormHelperText>} */}
+              </FormControl>
+              <FormControl required className={classes.formControl}>
+                <InputLabel htmlFor="size">{variantGroup[1].name}</InputLabel>
+                <Select
+                  displayEmpty
+                  className={classes.select}
+                  onChange={handleSize}
+                  value={variant2Info}
+                  name="size"
+                  error={hasError2}
+                >
+                  {sizes.map((size) => {
+                    return (
+                      <MenuItem
+                        key={size.key}
+                        name={size.text}
+                        value={size.value}
+                      >
+                        {size.text} ({size.price})
+                      </MenuItem>
+                    );
+                  })}
+                </Select>
+                {/* {hasError2 && <FormHelperText>This is required!</FormHelperText>} */}
+              </FormControl>
+            </div>
+          </CardContent>
+          <CardActions disableSpacing className={classes.cardActions}>
+            <IconButton aria-label="Add to Cart" onClick={handleAddToCart}>
+              <AddShoppingCart />
+            </IconButton>
+          </CardActions>
+        </Card>
+      </main>
+    </>
+  );
   return (
-    <main className={classes.content}>
-
-    <div className={classes.toolbar} />
-    <Card className={classes.root}>
-      <CardMedia
-        className={classes.media}
-        image={product.media.source}
-        title={product.name}
-      />
-      <CardContent>
-        <div className={classes.cardContent}>
-          <Typography gutterBottom variant="h5" component="h2">
-            {product.name}
-          </Typography>
-          <Typography gutterBottom variant="h5" component="h2">
-            {/* {product.price.formatted} */}
-          </Typography>
-        </div>
-        <Typography
-          dangerouslySetInnerHTML={{ __html: product.description }}
-          variant="body2"
-          color="textSecondary"
-          component="p"
-        />
-        <div>
-          <FormControl required className={classes.formControl}>
-            <InputLabel htmlFor="scent">{variantGroup[0].name}</InputLabel>
-            <Select
-              className={classes.select}
-              displayEmpty
-              onChange={handleScent}
-              value={variant1Info}
-              name="scent"
-              error={hasError1}
-            >
-              {scents.map((scent) => {
-                return (
-                  <MenuItem
-                    key={scent.key}
-                    name={scent.text}
-                    value={scent.value}
-                  >
-                    {scent.text}
-                  </MenuItem>
-                );
-              })}
-            </Select>
-            {/* {hasError1 && <FormHelperText>This is required!</FormHelperText>} */}
-          </FormControl>
-          <FormControl required className={classes.formControl}>
-            <InputLabel htmlFor="size">{variantGroup[1].name}</InputLabel>
-            <Select
-              displayEmpty
-              className={classes.select}
-              onChange={handleSize}
-              value={variant2Info}
-              name="size"
-              error={hasError2}
-            >
-              {sizes.map((size) => {
-                return (
-                  <MenuItem key={size.key} name={size.text} value={size.value}>
-                    {size.text} ({size.price})
-                  </MenuItem>
-                );
-              })}
-            </Select>
-            {/* {hasError2 && <FormHelperText>This is required!</FormHelperText>} */}
-          </FormControl>
-        </div>
-      </CardContent>
-      <CardActions disableSpacing className={classes.cardActions}>
-        <IconButton aria-label="Add to Cart" onClick={handleAddToCart}>
-          <AddShoppingCart />
-        </IconButton>
-      </CardActions>
-    </Card>
-  </main>
+    <Container>
+      <div className={classes.toolbar} />
+      <Typography className={classes.title} variant="h3" gutterBottom>
+        Product Details
+      </Typography>
+      {renderDetails()}
+    </Container>
   );
 };
 

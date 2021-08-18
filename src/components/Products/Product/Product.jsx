@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom';
 
 import useStyles from "./styles";
 
-const Product = ({ product , handleDetail}) => {
+const Product = ({ product }) => {
   const classes = useStyles();
   const [price, setPrice] = useState();
 
