@@ -19,8 +19,22 @@ import useStyles from "./styles";
 import { useParams } from "react-router-dom";
 
 const ProductDetails = ({ products, onAddToCart }) => {
-  const { id } = useParams();
+  const {id} = useParams();
+  console.log(id)
+  if (id === undefined ){
+  let id = sessionStorage.getItem("id")
+  console.log("set")
+  }
+  if (id !== undefined && id !== sessionStorage.getItem("id")) {
+    sessionStorage.clear();
+    sessionStorage.setItem("id", id);
+    console.log("changed")
+    }
+  
+
+  sessionStorage.setItem("id", id);
   const product = products.find((prod) => prod.id === id);
+console.log(products)
 
   const classes = useStyles();
   const [isLoading, setLoading] = useState(true);
@@ -48,7 +62,7 @@ const ProductDetails = ({ products, onAddToCart }) => {
       return scentInfo;
     });
     setScents(finalScentArray);
-  }, [product]);
+  }, []);
 
   useEffect(() => {
     let finalSizeArray = product.variant_groups[1].options.map((option) => {
@@ -60,7 +74,7 @@ const ProductDetails = ({ products, onAddToCart }) => {
       return sizeInfo;
     });
     setSizes(finalSizeArray);
-  }, [product]);
+  }, []);
 
   useEffect(() => {
     let finalVariantObject = product.variant_groups.map((variant_group) => {
@@ -74,7 +88,7 @@ const ProductDetails = ({ products, onAddToCart }) => {
     setVariantGroup(finalVariantObject);
 
     setLoading(false);
-  }, [product]);
+  }, []);
 
   useEffect(() => {
     if (!isLoading) {

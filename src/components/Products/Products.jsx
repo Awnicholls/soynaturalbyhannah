@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Grid from '@material-ui/core/Grid';
 
 import Product from './Product/Product';
@@ -6,6 +6,9 @@ import useStyles from './styles';
 
 const Products = ({ products, }) => {
   const classes = useStyles();
+  useEffect(() => {
+    document.title = `Products`;
+  });
 
   if (!products.length) return <p>Loading...</p>;
 
