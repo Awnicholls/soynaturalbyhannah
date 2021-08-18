@@ -8,5 +8,8 @@ export default makeStyles((theme) => ({
   media: {
     height: 260,
   },
+  grow: {
+    flexGrow: 1,
+  },
 
 }));

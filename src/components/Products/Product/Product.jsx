@@ -7,31 +7,36 @@ import {
   CardMedia,
   
 } from "@material-ui/core";
+import { Link } from 'react-router-dom';
+
 
 import useStyles from "./styles";
 
-const Product = ({ product }) => {
+const Product = ({ product , handleDetail}) => {
   const classes = useStyles();
   const [price, setPrice] = useState();
 
   useEffect(() => {
     let priceObject = product.variant_groups[1].options.map((option) => {
-      let priceInfo = {};
-      priceInfo.price = option.price.formatted;
+      let priceInfo = [option.price.formatted];
       return priceInfo;
     });
-    
-    console.log(priceObject)
+ const priceArray = priceObject.flat(1);
+    const priceSortedArray= priceArray.map(i=>Number(i))
+    priceSortedArray.sort();
+    const lowestPrice = priceSortedArray[0].toFixed(2);
+    console.log(lowestPrice)
+
+    console.log(priceSortedArray[0])
   
     // const finalPriceArray = Object.values(priceObject)
-    // finalPriceArray.sort();
-    // setPrice(finalPriceArray[0]);
-    console.log(finalPriceArray)
+    setPrice(lowestPrice);
+    // console.log(finalPriceArray)
   }, [product]);
 
   return (
     <Card className={classes.root}>
-      <CardActionArea onClick={e => {console.log(product)}}>
+      <CardActionArea onClick={e =>  {console.log(product)}}>
       <CardMedia
       component='img'
       alt={product.name}
@@ -41,9 +46,12 @@ const Product = ({ product }) => {
       />
       </CardActionArea>
       <CardActions>
-        <Button price='small' color='primary'>
-          View Details: from 
-
+        <Button  component={Link} to={`/Details/${product.id}`} aria-label="Show product details" size='small' color='primary'>
+          View Details
+        </Button>
+        <div className={classes.grow} />
+        <Button className={classes.price} size='small' color='secondary'>
+         £{price}+
         </Button>
       </CardActions>
     </Card>
