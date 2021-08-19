@@ -11,16 +11,11 @@ const theme = createTheme({
 });
 const App = () => {
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  const [products, setProducts] = useState([]);
   const [cart, setCart] = useState({});
   const [order, setOrder] = useState({});
   const [errorMessage, setErrorMessage] = useState("");
 
-  const fetchProducts = async () => {
-    const { data } = await commerce.products.list();
-    setProducts(data);
-    console.log(data)
-  };
+ 
 
   const fetchCart = async () => {
     setCart(await commerce.cart.retrieve());
@@ -72,7 +67,6 @@ const App = () => {
   };
 
   useEffect(() => {
-    fetchProducts();
     fetchCart();
   }, []);
 

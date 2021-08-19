@@ -14,7 +14,7 @@ import {
   Container,
 } from "@material-ui/core";
 import { AddShoppingCart } from "@material-ui/icons";
-import { connect, useSelector } from "react-redux";
+import { connect } from "react-redux";
 import useStyles from "./styles";
 import { useParams } from "react-router-dom";
 
@@ -233,5 +233,4 @@ const mapStateToProps = (state) => {
   }
 }
 export default connect(mapStateToProps)(ProductDetails);
-// export default ProductDetails;
 
