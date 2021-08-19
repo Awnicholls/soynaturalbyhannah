@@ -1,16 +1,16 @@
 import React, {useEffect} from 'react';
 import Grid from '@material-ui/core/Grid';
-
 import Product from './Product/Product';
 import useStyles from './styles';
+import { connect } from 'react-redux'
 
-const Products = ({ products, }) => {
+const Products = ({products}) => {
   const classes = useStyles();
+  console.log(products);
   useEffect(() => {
     document.title = `Products`;
   });
 
-  if (!products.length) return <p>Loading...</p>;
 
   return (
     <main className={classes.content}>
@@ -25,6 +25,10 @@ const Products = ({ products, }) => {
     </main>
   );
 };
-
-export default Products;
+const mapStateToProps = (state) => {
+  return {
+    products: state.products
+  }
+}
+export default connect(mapStateToProps)(Products);
 

@@ -3,7 +3,6 @@ import { CssBaseline, createTheme, ThemeProvider } from "@material-ui/core";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Navbar, Products, Cart, Checkout, Details } from "./components";
 import { commerce } from "./lib/commerce";
-
 import { purple } from "@material-ui/core/colors";
 const theme = createTheme({
   palette: {
@@ -19,8 +18,8 @@ const App = () => {
 
   const fetchProducts = async () => {
     const { data } = await commerce.products.list();
-
     setProducts(data);
+    console.log(data)
   };
 
   const fetchCart = async () => {
@@ -90,11 +89,10 @@ const App = () => {
           />
           <Switch>
             <Route exact path="/">
-              <Products products={products} />
+              <Products />
             </Route>
             <Route path="/details/:id">
               <Details
-                products={products}
                 onAddToCart={handleAddToCart}
                 handleUpdateCartQty
               />
@@ -121,5 +119,6 @@ const App = () => {
     </ThemeProvider>
   );
 };
+
 
 export default App;

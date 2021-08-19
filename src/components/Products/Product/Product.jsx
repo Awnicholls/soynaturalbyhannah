@@ -8,6 +8,7 @@ import {
   
 } from "@material-ui/core";
 import { Link } from 'react-router-dom';
+import { connect } from "react-redux";
 
 
 import useStyles from "./styles";
@@ -21,6 +22,7 @@ const Product = ({ product }) => {
       let priceInfo = [option.price.formatted];
       return priceInfo;
     });
+    
  const priceArray = priceObject.flat(1);
     const priceSortedArray= priceArray.map(i=>Number(i))
     priceSortedArray.sort();
@@ -57,5 +59,9 @@ const Product = ({ product }) => {
     </Card>
   );
 };
-
-export default Product;
+const mapStateToProps = (state) => {
+  return {
+    products: state.products
+  }
+}
+export default connect(mapStateToProps)(Product);

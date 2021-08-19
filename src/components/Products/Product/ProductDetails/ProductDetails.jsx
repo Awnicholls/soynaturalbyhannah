@@ -14,26 +14,17 @@ import {
   Container,
 } from "@material-ui/core";
 import { AddShoppingCart } from "@material-ui/icons";
-
+import { connect, useSelector } from "react-redux";
 import useStyles from "./styles";
 import { useParams } from "react-router-dom";
 
-const ProductDetails = ({ products, onAddToCart }) => {
-  const {id} = useParams();
-  console.log(id)
-  if (id === undefined ){
-  let id = sessionStorage.getItem("id")
-  console.log("set")
-  }
-  if (id !== undefined && id !== sessionStorage.getItem("id")) {
-    sessionStorage.clear();
-    sessionStorage.setItem("id", id);
-    console.log("changed")
-    }
-  
 
-  sessionStorage.setItem("id", id);
-  const product = products.find((prod) => prod.id === id);
+const ProductDetails = ({ products, onAddToCart }) => {
+  
+  const {id} = useParams();
+ const product = products.find((product) => product.id === id);
+
+console.log(product)
 console.log(products)
 
   const classes = useStyles();
@@ -62,7 +53,7 @@ console.log(products)
       return scentInfo;
     });
     setScents(finalScentArray);
-  }, []);
+  }, [product]);
 
   useEffect(() => {
     let finalSizeArray = product.variant_groups[1].options.map((option) => {
@@ -74,7 +65,7 @@ console.log(products)
       return sizeInfo;
     });
     setSizes(finalSizeArray);
-  }, []);
+  }, [product]);
 
   useEffect(() => {
     let finalVariantObject = product.variant_groups.map((variant_group) => {
@@ -88,7 +79,7 @@ console.log(products)
     setVariantGroup(finalVariantObject);
 
     setLoading(false);
-  }, []);
+  }, [product]);
 
   useEffect(() => {
     if (!isLoading) {
@@ -235,5 +226,12 @@ console.log(products)
     </Container>
   );
 };
+const mapStateToProps = (state) => {
 
-export default ProductDetails;
+  return {
+    products: state.products
+  }
+}
+export default connect(mapStateToProps)(ProductDetails);
+// export default ProductDetails;
+
