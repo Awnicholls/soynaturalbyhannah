@@ -141,20 +141,21 @@ console.log(products)
             image={product.media.source}
             title={product.name}
           />
-          <CardContent>
-            <div className={classes.cardContent}>
+          <CardContent className={classes.cardContent}>
+            <div >
               <Typography gutterBottom variant="h5" component="h2">
                 {product.name}
               </Typography>
               <Typography gutterBottom variant="h5" component="h2">
                 {/* {product.price.formatted} */}
               </Typography>
-            </div>
+              </div>
             <Typography
               dangerouslySetInnerHTML={{ __html: product.description }}
               variant="body2"
               color="textSecondary"
               component="p"
+              className={classes.cardDescription}
             />
             <div>
               <FormControl required className={classes.formControl}>
@@ -206,12 +207,12 @@ console.log(products)
                 {/* {hasError2 && <FormHelperText>This is required!</FormHelperText>} */}
               </FormControl>
             </div>
-          </CardContent>
           <CardActions disableSpacing className={classes.cardActions}>
             <IconButton aria-label="Add to Cart" onClick={handleAddToCart}>
               <AddShoppingCart />
             </IconButton>
           </CardActions>
+          </CardContent>
         </Card>
       </main>
     </>
@@ -219,9 +220,6 @@ console.log(products)
   return (
     <Container>
       <div className={classes.toolbar} />
-      <Typography className={classes.title} variant="h3" gutterBottom>
-        Product Details
-      </Typography>
       {renderDetails()}
     </Container>
   );

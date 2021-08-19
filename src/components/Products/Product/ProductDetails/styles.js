@@ -6,18 +6,36 @@ export default makeStyles((theme) => ({
     flexGrow: 1,
     backgroundColor: theme.palette.background.default,
     padding: theme.spacing(3),
+    display: 'flex',
+    justifyContent: 'center',
     },
   root: {
     display: 'flex',
+    width: 'max-content',
+    [theme.breakpoints.down('md')]:{
+flexDirection: 'column',
+    }
   
   },
   media: {
-    height: 260,
+    height: '100%',
     width: 260,
+    [theme.breakpoints.down('md')]:{
+      width: '100%',
+      height: 260,
+          }
   },
+  cardContent: {
+    flexDirection: 'column',
+  },
+
   formControl:{
-margin: theme.spacing(1),
-width: 'auto',
+marginBottom: theme.spacing(1),
+width: '51%',
+[theme.breakpoints.down('md')]:{
+  width: '95%',
+      }
+
   },
   //   select: {
   // height: 10,
