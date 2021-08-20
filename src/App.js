@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { CssBaseline, createTheme, ThemeProvider } from "@material-ui/core";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { Navbar, Products, Cart, Checkout, Details } from "./components";
+import { Navbar, Products, Cart, Checkout, Details, Homepage} from "./components";
 import { commerce } from "./lib/commerce";
 import { purple } from "@material-ui/core/colors";
 const theme = createTheme({
@@ -10,7 +10,6 @@ const theme = createTheme({
   },
 });
 const App = () => {
-  const [mobileOpen, setMobileOpen] = React.useState(false);
   const [cart, setCart] = useState({});
   const [order, setOrder] = useState({});
   const [errorMessage, setErrorMessage] = useState("");
@@ -70,7 +69,6 @@ const App = () => {
     fetchCart();
   }, []);
 
-  const handleDrawerToggle = () => setMobileOpen(!mobileOpen);
 
   return (
     <ThemeProvider theme={theme}>
@@ -79,10 +77,12 @@ const App = () => {
           <CssBaseline />
           <Navbar
             totalItems={cart.total_items}
-            handleDrawerToggle={handleDrawerToggle}
           />
           <Switch>
-            <Route exact path="/">
+          <Route exact path="/">
+              <Homepage />
+            </Route>
+            <Route exact path="/products">
               <Products />
             </Route>
             <Route path="/details/:id">

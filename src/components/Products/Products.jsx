@@ -8,7 +8,7 @@ const Products = ({products}) => {
   const classes = useStyles();
   console.log(products);
   useEffect(() => {
-    document.title = `Products`;
+    document.title = `Soy Natural by Hannah`;
   });
 
 

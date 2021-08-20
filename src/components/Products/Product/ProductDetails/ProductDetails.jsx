@@ -5,27 +5,29 @@ import {
   CardContent,
   CardActions,
   Typography,
-  IconButton,
   InputLabel,
   MenuItem,
   FormControl,
   Select,
   CircularProgress,
   Container,
+  Button,
 } from "@material-ui/core";
 import { AddShoppingCart } from "@material-ui/icons";
 import { connect } from "react-redux";
 import useStyles from "./styles";
 import { useParams } from "react-router-dom";
-
+import { Link } from "react-router-dom";
+import Snackbar from "@material-ui/core/Snackbar";
+import IconButton from "@material-ui/core/IconButton";
+import CloseIcon from "@material-ui/icons/Close";
 
 const ProductDetails = ({ products, onAddToCart }) => {
-  
-  const {id} = useParams();
- const product = products.find((product) => product.id === id);
+  const { id } = useParams();
+  const product = products.find((product) => product.id === id);
 
-console.log(product)
-console.log(products)
+  console.log(product);
+  console.log(products);
 
   const classes = useStyles();
   const [isLoading, setLoading] = useState(true);
@@ -38,6 +40,7 @@ console.log(products)
   const [variant2GroupId, setVariant2GroupId] = useState("");
   const [hasError1, setHasError1] = useState(false);
   const [hasError2, setHasError2] = useState(false);
+  const [open, setOpen] = React.useState(false);
 
   useEffect(() => {
     document.title = `${product.name}`;
@@ -121,7 +124,15 @@ console.log(products)
     };
     if (variant1Info && variant2Info) {
       onAddToCart(product.id, 1, variantObject);
+      setOpen(true);
     }
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpen(false);
   };
 
   if (isLoading) {
@@ -142,14 +153,14 @@ console.log(products)
             title={product.name}
           />
           <CardContent className={classes.cardContent}>
-            <div >
+            <div>
               <Typography gutterBottom variant="h5" component="h2">
                 {product.name}
               </Typography>
               <Typography gutterBottom variant="h5" component="h2">
                 {/* {product.price.formatted} */}
               </Typography>
-              </div>
+            </div>
             <Typography
               dangerouslySetInnerHTML={{ __html: product.description }}
               variant="body2"
@@ -180,7 +191,6 @@ console.log(products)
                     );
                   })}
                 </Select>
-                {/* {hasError1 && <FormHelperText>This is required!</FormHelperText>} */}
               </FormControl>
               <FormControl required className={classes.formControl}>
                 <InputLabel htmlFor="size">{variantGroup[1].name}</InputLabel>
@@ -207,13 +217,53 @@ console.log(products)
                 {/* {hasError2 && <FormHelperText>This is required!</FormHelperText>} */}
               </FormControl>
             </div>
-          <CardActions disableSpacing className={classes.cardActions}>
-            <IconButton aria-label="Add to Cart" onClick={handleAddToCart}>
-              <AddShoppingCart />
-            </IconButton>
-          </CardActions>
+            <CardActions disableSpacing className={classes.cardActions}>
+              <Button
+                variant="contained"
+                className={classes.button}
+                color="secondary"
+                component={Link}
+                to={"/products"}
+              >
+                Back to Products
+              </Button>
+              <div className={classes.grow} />
+
+              <Button
+                color="primary"
+                variant="contained"
+                startIcon={<AddShoppingCart />}
+                onClick={handleAddToCart}
+                aria-label="Add to Cart"
+                className={classes.button}
+              >
+                Add to Checkout
+              </Button>
+            </CardActions>
           </CardContent>
         </Card>
+        <Snackbar
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "center",
+          }}
+          open={open}
+          autoHideDuration={6000}
+          onClose={handleClose}
+          message="Added to Cart"
+          action={
+            <React.Fragment>
+              <IconButton
+                size="small"
+                aria-label="close"
+                color="inherit"
+                onClick={handleClose}
+              >
+                <CloseIcon fontSize="small" />
+              </IconButton>
+            </React.Fragment>
+          }
+        />
       </main>
     </>
   );
@@ -225,10 +275,8 @@ console.log(products)
   );
 };
 const mapStateToProps = (state) => {
-
   return {
-    products: state.products
-  }
-}
+    products: state.products,
+  };
+};
 export default connect(mapStateToProps)(ProductDetails);
-
