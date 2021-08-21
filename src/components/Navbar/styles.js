@@ -3,9 +3,9 @@ import { makeStyles } from '@material-ui/core/styles';
 const drawerWidth = 0;
 
 export default makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
+  // root: {
+  //   flexGrow: 1,
+  // },
   menuButton: {
     marginRight: theme.spacing(2),
   },
@@ -17,8 +17,11 @@ export default makeStyles((theme) => ({
 
   list: {
     width: 250,
+      justifyContent: 'center',
   },
-
+  paperAnchorLeft: {
+justifyContent: 'center',
+  },
 
   fullList: {
     width: 'auto',

@@ -73,7 +73,7 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <Router>
-        <div style={{ display: "flex" }}>
+        <div style={{ display: "flex", justifyContent: 'center' }}>
           <CssBaseline />
           <Navbar
             totalItems={cart.total_items}

@@ -58,7 +58,7 @@ const PrimaryAppBar = ({ totalItems }) => {
 
   return (
     <>
-      <div className={classes.root}>
+      <div>
       <AppBar position="fixed" className={classes.appBar} color="inherit">     
            <Toolbar>
             <IconButton
