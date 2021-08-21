@@ -6,10 +6,10 @@ import TitleCard from './TitleCard/TitleCard';
 const Hero = () => {
     const classes = useStyles();
     let config = {
-        num: [4, 7],
+        num: [5, 10],
         rps: 0.1,
         radius: [5, 40],
-        life: [1.5, 3],
+        life: [2, 3],
         v: [2, 3],
         tha: [-40, 40],
         alpha: [0.6, 0],

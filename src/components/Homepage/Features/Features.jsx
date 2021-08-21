@@ -25,7 +25,7 @@ const Features = () => {
         </Typography>
       </div>
       <Grid container spacing={3}>
-        <Grid item xs={3}>
+        <Grid item xs={6} m={3}>
           <Paper className={classes.paper}>
             <Typography component="h2" variant="h6">
               <EcoTwoTone style={{color: green[500], fontSize: 60}}/>
@@ -38,7 +38,7 @@ What we do:
             </Typography>
           </Paper>
         </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={6} m={3}>
           <Paper className={classes.paper}>
           <img src={handmadeIcon} alt="handmade icon" width='50px'/>
             <Typography component="h2" variant="h6">
@@ -49,7 +49,7 @@ What we do:
             </Typography>
           </Paper>
         </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={6} m={3}>
           <Paper className={classes.paper}>
           <img src={ukIcon} alt="uk icon" width='50px'/>
             <Typography component="h2" variant="h6">
@@ -58,7 +58,7 @@ Made In the U.K.            </Typography>
 Locally sourced and made            </Typography>
           </Paper>
         </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={6} m={3}>
           <Paper className={classes.paper}>
           <img src={giftBox} alt="gift box icon" width='50px'/>
             <Typography component="h2" variant="h6">
