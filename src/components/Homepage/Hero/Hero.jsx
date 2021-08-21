@@ -1,8 +1,10 @@
 import React from 'react';
 import ParticlesBg from 'particles-bg'
+import useStyles from "./styles";
 import TitleCard from './TitleCard/TitleCard';
 
 const Hero = () => {
+    const classes = useStyles();
     let config = {
         num: [4, 7],
         rps: 0.1,
@@ -39,6 +41,7 @@ const Hero = () => {
       <>
     <section
       id="hero"
+      className={classes.hero}
       >
           <TitleCard/>
       <ParticlesBg type="custom" config={config} bg={true}/>

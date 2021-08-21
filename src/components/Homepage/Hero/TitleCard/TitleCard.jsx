@@ -9,7 +9,7 @@ import logo from "../../../../assets/logo.png";
 const TitleCard = () => {
   const classes = useStyles();
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component="div" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
         <img src={logo} alt="Soy Natural by Hannah logo" />
