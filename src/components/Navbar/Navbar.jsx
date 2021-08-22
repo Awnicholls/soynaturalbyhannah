@@ -43,8 +43,12 @@ const PrimaryAppBar = ({ totalItems }) => {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-
-        {['Products', 'About'].map((text, index) => (
+      <ListItem button  component={Link}
+          to={`/`} key='Home'>
+            <ListItemIcon></ListItemIcon>
+            <ListItemText primary='Home' />
+          </ListItem>
+        {['Products', 'About', 'Cart'].map((text, index) => (
           <ListItem button  component={Link}
           to={`/${text}`} key={text}>
             <ListItemIcon></ListItemIcon>

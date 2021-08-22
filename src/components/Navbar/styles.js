@@ -3,9 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 const drawerWidth = 0;
 
 export default makeStyles((theme) => ({
-  // root: {
-  //   flexGrow: 1,
-  // },
+
   menuButton: {
     marginRight: theme.spacing(2),
   },
@@ -14,13 +12,14 @@ export default makeStyles((theme) => ({
         textDecoration: 'none',
 
   },
-
   list: {
     width: 250,
-      justifyContent: 'center',
+display: 'flex',
+flexDirection: 'column',
+justifyContent: 'center',
+height: '100%',
   },
   paperAnchorLeft: {
-justifyContent: 'center',
   },
 
   fullList: {
@@ -35,20 +34,5 @@ justifyContent: 'center',
       marginLeft: drawerWidth,
     },
   },
-  // title: {
-  //   flexGrow: 1,
-  //   alignItems: 'center',
-  //   display: 'flex',
-  //   textDecoration: 'none',
-  // },
 
-  // menuButton: {
-  //   marginRight: theme.spacing(2),
-  //   [theme.breakpoints.up('sm')]: {
-  //     display: 'none',
-  //   },
-  // },
-  // grow: {
-  //   flexGrow: 1,
-  // },
 }));
