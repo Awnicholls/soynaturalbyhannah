@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { Container, Typography, Button, Grid } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 
@@ -7,6 +7,9 @@ import useStyles from './styles';
 
 const Cart = ({ cart, onUpdateCartQty, onRemoveFromCart, onEmptyCart }) => {
   const classes = useStyles();
+  useEffect(() => {
+    document.title = `Soy Natural by Hannah`;
+  });
 
   const handleEmptyCart = () => onEmptyCart();
 

@@ -48,7 +48,7 @@ const PrimaryAppBar = ({ totalItems }) => {
             <ListItemIcon></ListItemIcon>
             <ListItemText primary='Home' />
           </ListItem>
-        {['Products', 'About', 'Cart'].map((text, index) => (
+        {['Products', 'Cart'].map((text, index) => (
           <ListItem button  component={Link}
           to={`/${text}`} key={text}>
             <ListItemIcon></ListItemIcon>

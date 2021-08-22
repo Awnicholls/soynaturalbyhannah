@@ -1,15 +1,14 @@
 import React from "react";
 import useStyles from "./styles";
-import ImageList from "@material-ui/core/ImageList";
-import ImageListItem from "@material-ui/core/ImageListItem";
-import ImageListItemBar from "@material-ui/core/ImageListItemBar";
-import {
 
+import {
+Grid,
   Container,
   CssBaseline,
   Typography,
 } from "@material-ui/core";
-import { Link } from "react-router-dom";
+import Imagelist from "./Imagelist/Imagelist";
+
 
 import itemData from "./itemData";
 
@@ -19,26 +18,20 @@ const Carousel = () => {
   return (
     <Container className={classes.content} component="section" id="image list">
       <CssBaseline />
-      <div gutterBottom className={classes.header}>
+      <div className={classes.header}>
         <Typography component="h1" variant="h5">
           Product Preview
         </Typography>
-      </div>
-      <div className={classes.root}>
-        <ImageList className={classes.imageList} cols={{xs: 1, md: 6}}>
-          {itemData.map((item) => (
-            <ImageListItem className={classes.image} component={Link} to={'/products'} key={item.img}>
-              <img src={item.img} alt={item.title} />
-              <ImageListItemBar
-                title={item.title}
-                classes={{
-                  root: classes.titleBar,
-                  title: classes.title,
-                }}
-              />
-            </ImageListItem>
-          ))}
-        </ImageList>
+        <main className={classes.content}>
+      <div className={classes.toolbar} />
+      <Grid container justifyContent="flex-start" spacing={4}>
+        {itemData.map((item) => (
+          <Grid key={item.img} item xs={12} sm={6} md={4} lg={3}>
+            <Imagelist item={item}  />
+          </Grid>
+        ))}
+      </Grid>
+    </main>
       </div>
     </Container>
   );
