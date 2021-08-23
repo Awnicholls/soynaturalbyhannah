@@ -26,9 +26,6 @@ const ProductDetails = ({ products, onAddToCart }) => {
   const { id } = useParams();
   const product = products.find((product) => product.id === id);
 
-  console.log(product);
-  console.log(products);
-
   const classes = useStyles();
   const [isLoading, setLoading] = useState(true);
   const [scents, setScents] = useState([]);
@@ -52,7 +49,6 @@ const ProductDetails = ({ products, onAddToCart }) => {
       scentInfo.key = option.name;
       scentInfo.text = option.name;
       scentInfo.value = option.id;
-
       return scentInfo;
     });
     setScents(finalScentArray);
@@ -94,16 +90,10 @@ const ProductDetails = ({ products, onAddToCart }) => {
   if (product === undefined) return "Loading";
 
   const handleScent = (e) => {
-    console.log(e.currentTarget.getAttribute("data-value"));
-    console.log(e.currentTarget.getAttribute("name"));
-
     setVariant1Info(e.currentTarget.getAttribute("data-value"));
   };
 
   const handleSize = (e) => {
-    console.log(e.currentTarget.getAttribute("data-value"));
-    console.log(e.currentTarget.getAttribute("name"));
-
     setVariant2Info(e.currentTarget.getAttribute("data-value"));
   };
 
@@ -156,9 +146,6 @@ const ProductDetails = ({ products, onAddToCart }) => {
             <div>
               <Typography gutterBottom variant="h5" component="h2">
                 {product.name}
-              </Typography>
-              <Typography gutterBottom variant="h5" component="h2">
-                {/* {product.price.formatted} */}
               </Typography>
             </div>
             <Typography
@@ -214,7 +201,6 @@ const ProductDetails = ({ products, onAddToCart }) => {
                     );
                   })}
                 </Select>
-                {/* {hasError2 && <FormHelperText>This is required!</FormHelperText>} */}
               </FormControl>
             </div>
             <CardActions disableSpacing className={classes.cardActions}>

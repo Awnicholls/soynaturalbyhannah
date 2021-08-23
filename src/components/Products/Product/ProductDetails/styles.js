@@ -35,7 +35,8 @@ export default makeStyles((theme) => ({
     [theme.breakpoints.down("md")]: {
       width: "100%",
     },
-  },  grow: {
+  },
+  grow: {
     flexGrow: 1,
   },
   formControl: {
@@ -47,7 +48,7 @@ export default makeStyles((theme) => ({
   },
   cardActions: {
     justifyContent: "flex-start",
-    
+
     [theme.breakpoints.down("md")]: {
       flexDirection: "column",
     },

@@ -9,12 +9,12 @@ import {
   List,
   ListItem,
   ListItemIcon,
-  ListItemText
+  ListItemText,
 } from "@material-ui/core";
 import { ShoppingCart } from "@material-ui/icons";
 import { Link, useLocation } from "react-router-dom";
-import MenuIcon from '@material-ui/icons/Menu';
-import clsx from 'clsx';
+import MenuIcon from "@material-ui/icons/Menu";
+import clsx from "clsx";
 import useStyles from "./styles";
 
 const PrimaryAppBar = ({ totalItems }) => {
@@ -25,32 +25,32 @@ const PrimaryAppBar = ({ totalItems }) => {
   });
 
   const toggleDrawer = (anchor, open) => (event) => {
-    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+    if (
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
       return;
     }
 
     setState({ ...state, [anchor]: open });
   };
 
-
   const list = (anchor) => (
     <div
       className={clsx(classes.list, {
-        [classes.fullList]: anchor === 'top' || anchor === 'bottom',
+        [classes.fullList]: anchor === "top" || anchor === "bottom",
       })}
       role="presentation"
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-      <ListItem button  component={Link}
-          to={`/`} key='Home'>
-            <ListItemIcon></ListItemIcon>
-            <ListItemText primary='Home' />
-          </ListItem>
-        {['Products', 'Cart'].map((text, index) => (
-          <ListItem button  component={Link}
-          to={`/${text}`} key={text}>
+        <ListItem button component={Link} to={`/`} key="Home">
+          <ListItemIcon></ListItemIcon>
+          <ListItemText primary="Home" />
+        </ListItem>
+        {["Products", "Cart"].map((text, index) => (
+          <ListItem button component={Link} to={`/${text}`} key={text}>
             <ListItemIcon></ListItemIcon>
             <ListItemText primary={text} />
           </ListItem>
@@ -59,24 +59,27 @@ const PrimaryAppBar = ({ totalItems }) => {
     </div>
   );
 
-
   return (
     <>
       <div>
-      <AppBar position="fixed" className={classes.appBar} color="inherit">     
-           <Toolbar>
+        <AppBar position="fixed" className={classes.appBar} color="inherit">
+          <Toolbar>
             <IconButton
               edge="start"
               className={classes.menuButton}
               color="inherit"
               aria-label="menu"
-              onClick={toggleDrawer('left', true)}
+              onClick={toggleDrawer("left", true)}
             >
               <MenuIcon />
             </IconButton>
-            <Drawer  anchor='left' open={state['left']} onClose={toggleDrawer('left', false)}>
-    {list('left')}
-  </Drawer>
+            <Drawer
+              anchor="left"
+              open={state["left"]}
+              onClose={toggleDrawer("left", false)}
+            >
+              {list("left")}
+            </Drawer>
             <Typography
               component={Link}
               to="/"

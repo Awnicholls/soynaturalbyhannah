@@ -1,14 +1,8 @@
 import React from "react";
 import useStyles from "./styles";
 
-import {
-Grid,
-  Container,
-  CssBaseline,
-  Typography,
-} from "@material-ui/core";
+import { Grid, Container, CssBaseline, Typography } from "@material-ui/core";
 import Imagelist from "./Imagelist/Imagelist";
-
 
 import itemData from "./itemData";
 
@@ -23,15 +17,15 @@ const Carousel = () => {
           Product Preview
         </Typography>
         <main className={classes.content}>
-      <div className={classes.toolbar} />
-      <Grid container justifyContent="flex-start" spacing={4}>
-        {itemData.map((item) => (
-          <Grid key={item.img} item xs={12} sm={6} md={4} lg={3}>
-            <Imagelist item={item}  />
+          <div className={classes.toolbar} />
+          <Grid container justifyContent="flex-start" spacing={4}>
+            {itemData.map((item) => (
+              <Grid key={item.img} item xs={12} sm={6} md={4} lg={3}>
+                <Imagelist item={item} />
+              </Grid>
+            ))}
           </Grid>
-        ))}
-      </Grid>
-    </main>
+        </main>
       </div>
     </Container>
   );

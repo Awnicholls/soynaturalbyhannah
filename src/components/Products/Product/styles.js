@@ -1,9 +1,8 @@
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from "@material-ui/core/styles";
 
 export default makeStyles((theme) => ({
   root: {
-    // maxWidth: 345, original width style
-    maxWidth: '100%',
+    maxWidth: "100%",
   },
   media: {
     height: 260,
@@ -11,6 +10,4 @@ export default makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
   },
-
-
 }));

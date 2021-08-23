@@ -100,10 +100,10 @@ const App = () => {
             </Route>
             <Route path="/checkout" exact>
               <Checkout
-              order={order}
-              errorMessage={errorMessage}
-              cart={cart}
-              handleCaptureCheckout={handleCaptureCheckout}
+                cart={cart}
+                order={order}
+                onCaptureCheckout={handleCaptureCheckout}
+                error={errorMessage}
               />
             </Route>
           </Switch>

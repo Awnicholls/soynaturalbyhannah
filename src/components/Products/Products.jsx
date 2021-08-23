@@ -1,16 +1,14 @@
-import React, {useEffect} from 'react';
-import Grid from '@material-ui/core/Grid';
-import Product from './Product/Product';
-import useStyles from './styles';
-import { connect } from 'react-redux'
+import React, { useEffect } from "react";
+import Grid from "@material-ui/core/Grid";
+import Product from "./Product/Product";
+import useStyles from "./styles";
+import { connect } from "react-redux";
 
-const Products = ({products}) => {
+const Products = ({ products }) => {
   const classes = useStyles();
-  console.log(products);
   useEffect(() => {
     document.title = `Soy Natural by Hannah`;
   });
-
 
   return (
     <main className={classes.content}>
@@ -18,7 +16,7 @@ const Products = ({products}) => {
       <Grid container justifyContent="flex-start" spacing={4}>
         {products.map((product) => (
           <Grid key={product.id} item xs={12} sm={6} md={4} lg={3}>
-            <Product product={product}  />
+            <Product product={product} />
           </Grid>
         ))}
       </Grid>
@@ -27,8 +25,7 @@ const Products = ({products}) => {
 };
 const mapStateToProps = (state) => {
   return {
-    products: state.products
-  }
-}
+    products: state.products,
+  };
+};
 export default connect(mapStateToProps)(Products);
-
