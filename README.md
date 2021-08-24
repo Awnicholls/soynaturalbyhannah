@@ -10,7 +10,7 @@ You can check out the LIVE project [**HERE**](https://soynaturalbyhannah.co.uk/ 
 The primary motive was to try out and learn both **Redux** and **Material-UI**. I also thought an headless e-commerce project would be an
 interesting and difficult undertaking in general. 
 All data was added to commerce.js and is fully customiseable, taken from a real store (with permission)
-[**SoyNaturalByHannah**](https://soynaturalbyhannah.co.uk/ 'Original Store').
+[**SoyNaturalByHannah**](https://www.etsy.com/uk/shop/SoyNaturalByHannah 'Original Store').
 
 In addition, an eccomerce site has many possible imporements and can be changed and made better over time.
 Some of the things I would like to redo, as this was my first big react project, is to use context over
@@ -27,6 +27,7 @@ Using material Ui helped make it so the site is fully responsive to mobile or ta
 - **Redux** for state management
 - **Material-UI** for styling and components
 - **React Router** for routing
+- **React Hook Forms** for form
 
 ---
 
