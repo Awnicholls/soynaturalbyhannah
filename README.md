@@ -15,6 +15,8 @@ All data was added to commerce.js and is fully customiseable, taken from a real 
 In addition, an eccomerce site has many possible imporements and can be changed and made better over time.
 Some of the things I would like to redo, as this was my first big react project, is to use context over
 prop drilling, to better integrate redux, allow for more or less variations on the products, for a start.
+
+Using material Ui helped make it so the site is fully responsive to mobile or tablet screens, and looks great no matter the viewport.
 ---
 
 ### Technologies used:
