@@ -25,12 +25,11 @@ const Product = ({ product }) => {
     const priceSortedArray = priceArray.map((i) => Number(i));
     priceSortedArray.sort(compareDecimals);
     const lowestPrice = priceSortedArray[0].toFixed(2);
-    
+
     function compareDecimals(a, b) {
-        if (a === b) 
-             return 0;
-    
-        return a < b ? -1 : 1;
+      if (a === b) return 0;
+
+      return a < b ? -1 : 1;
     }
     setPrice(lowestPrice);
   }, [product]);

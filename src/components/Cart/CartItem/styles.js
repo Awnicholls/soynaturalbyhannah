@@ -13,11 +13,10 @@ export default makeStyles((theme) => ({
   cartActions: {
     justifyContent: "space-between",
     flexDirection: "column",
-    
   },
   buttons: {
     display: "flex",
     alignItems: "center",
-    padding: 10
+    padding: 10,
   },
 }));

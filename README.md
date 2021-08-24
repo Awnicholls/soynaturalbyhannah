@@ -1,70 +1,50 @@
-# Getting Started with Create React App
+## Headless E-Commerce site - https://soynaturalbyhannah.co.uk/
+Users can view products, choose 2 options for each products, a scent type and a product variation. Once added to cart, users can change the quantity of products they have before checking out. In the checkout they can choose which shipping method they would like, then finally pay through stripe. An email is sent with a reciept and product list summary, as well as a follow up email when the products are shipped.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+You can check out the LIVE project [**HERE**](https://soynaturalbyhannah.co.uk/ 'Completed project').
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+### Motivation
 
-### `npm start`
+The primary motive was to try out and learn both **Redux** and **Material-UI**. I also thought an headless e-commerce project would be an
+interesting and difficult undertaking in general. 
+All data was added to commerce.js and is fully customiseable, taken from a real store (with permission)
+[**SoyNaturalByHannah**](https://soynaturalbyhannah.co.uk/ 'Original Store').
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+In addition, an eccomerce site has many possible imporements and can be changed and made better over time.
+Some of the things I would like to redo, as this was my first big react project, is to use context over
+prop drilling, to better integrate redux, allow for more or less variations on the products, for a start.
+---
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Technologies used:
 
-### `npm test`
+- **ReactJS**
+- **CommerceJS** for products hosting and cart/checkout api
+- **Stripe** for payment
+- **Redux** for state management
+- **Material-UI** for styling and components
+- **React Router** for routing
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+### Challenges:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Using an api and calling it for the products and checkout/cart process
+was intimidating at first, but commerce.js makes it so easy to integrate it
+into your project.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+material ui was my first UI framework. Using it to implement components and their styling made everything much easier, and allowed me to focus on how the store worked moreso than how it looked.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
+### Future
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+I will be revising this as my skills in react, redux and frameworks that could improve the project increase. There are a couple of errors that I still need to fix, but I am happy with how the site works and functions as is at the moment so they will be addressed in the future through branches. 
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Some Icons were taken from 
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Icons made by https://www.flaticon.com/authors/flat-icons from https://www.flaticon.com/
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+and I will be adding their attribution in the footer.

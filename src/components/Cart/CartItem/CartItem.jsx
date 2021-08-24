@@ -19,7 +19,6 @@ const CartItem = ({ item, onUpdateCartQty, onRemoveFromCart }) => {
   const handleRemoveFromCart = (lineItemId) => onRemoveFromCart(lineItemId);
 
   return (
-  
     <Card className="cartItem">
       <CardMedia
         image={item.media.source}
@@ -43,7 +42,8 @@ const CartItem = ({ item, onUpdateCartQty, onRemoveFromCart }) => {
           <Button
             type="button"
             size="small"
-            variant="outlined" color="primary"
+            variant="outlined"
+            color="primary"
             onClick={() => handleUpdateCartQty(item.id, item.quantity - 1)}
           >
             -
@@ -52,7 +52,8 @@ const CartItem = ({ item, onUpdateCartQty, onRemoveFromCart }) => {
           <Button
             type="button"
             size="small"
-            variant="outlined" color="secondary"
+            variant="outlined"
+            color="secondary"
             onClick={() => handleUpdateCartQty(item.id, item.quantity + 1)}
           >
             +
