@@ -45,6 +45,8 @@ material ui was my first UI framework. Using it to implement components and thei
 
 I will be revising this as my skills in react, redux and frameworks that could improve the project increase. There are a couple of errors that I still need to fix, but I am happy with how the site works and functions as is at the moment so they will be addressed in the future through branches. 
 
+The site is also slow to load in places, so I will be looking into how to speed it up and reduce loading times.
+
 
 Some Icons were taken from 
 
